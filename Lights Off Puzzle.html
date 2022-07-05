@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)file:///C:/Users/Eamon/Downloads/game.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<script>
+function toggle(i,j) {
+      b=document.getElementById("but_"+i+j);
+      t = b.innerHTML;
+      if (t=="X") {b.innerHTML = "O";
+                   b.setAttribute("style", "color:green; background-color:white");
+                  }
+      if (t=="O") {b.innerHTML = "X";
+                   b.setAttribute("style", "color:white; background-color:black");
+                  }
+    }
+    
+
+// Please complete this function
+function press(i,j) {
+var element = document.getElementById("but_"+i+j);
+var id = element.getAttribute("id");
+
+var array = id.split("");
+var coord1 = Number(array[4]);
+var coord2 = Number (array[5]);
+var count = 0
+    toggle(coord1,coord2);
+try {
+    toggle(coord1+1,coord2);
+
+     checkAllOff();
+}
+catch(err){
+ count = count+1;
+}
+try {
+    toggle(coord1-1,coord2);
+
+     checkAllOff();
+}
+catch(err){
+ count = count+1;
+}
+try {
+    toggle(coord1,coord2-1);
+
+     checkAllOff();
+}
+catch(err){
+ count = count+1;
+}
+try {
+    toggle(coord1,coord2+1);
+
+     checkAllOff();
+}
+catch(err){
+ count = count+1;
+}
+
+
+
+}
+
+// Please complete this function
+function checkAllOff(){
+
+var count = 0
+
+for( var y=0; y< 5; y++ ) {
+    for(var r=0; r<5; r++){
+     var cell = document.getElementById("but_"+y+r);
+      f = cell.innerHTML;
+      if (f == "X"){ count = count +1;
+  } 
+ } 
+}
+
+while (count == 25){
+return(document.getElementById("end").innerHTML="Congratulations! All lights out!")
+
+}
+while (count < 25){
+return(document.getElementById("end").innerHTML="")
+
+}
+}
+
+// Please complete this function
+function resetGrid(){
+document.getElementById("end").innerHTML=""
+for( var z=0; z< 5; z++ ) { 
+        for(var x=0; x<5; x++){    
+            var cell = document.getElementById("but_"+z+x); 
+            var state = cell.innerHTML
+            if(state == "X"){cell.innerHTML = "O";
+               cell.setAttribute("style", "color:green; background-color:white");
+            }
+
+
+        
+        }
+     }
+   
+}
+
+// 
+function generateGrid() {
+        var d = document.getElementById("button-grid");
+        var table = document.createElement("table");
+        d.appendChild(table);
+        for (var i = 0; i < 5; i++) {
+                var row = document.createElement("tr");
+                for (var j = 0; j < 5; j++) {
+                        var cell = document.createElement("td");
+                        cell.innerHTML = "<button type=button id=but_" + i + j +
+                                         " onclick=\"press(" +i + ',' +j + ")\"" + 
+                                         " style=\"color:green; background-color:white\"" +
+                                         ">O</button>" ;
+                        row.appendChild(cell);
+                }
+                table.appendChild(row);
+        }
+        toggle(2,2) // initial state
+}
+
+window.onload = function() {
+        generateGrid();
+};
+
+</script> 
+
+<title>Lights Off Puzzle</title>
+</head> 
+
+<body>
+<h1>5x5 Lights off Puzzle</h1>
+<p>Click on buttons until they all turn black. When a button is pressed, the buttons above, below, left and right of the button pressed are also toggled. </p>
+<div id="button-grid"><table><tr><td><button type="button" id="but_00" onclick="press(0,0)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_01" onclick="press(0,1)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_02" onclick="press(0,2)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_03" onclick="press(0,3)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_04" onclick="press(0,4)" style="color:green; background-color:white">O</button></td></tr><tr><td><button type="button" id="but_10" onclick="press(1,0)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_11" onclick="press(1,1)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_12" onclick="press(1,2)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_13" onclick="press(1,3)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_14" onclick="press(1,4)" style="color:green; background-color:white">O</button></td></tr><tr><td><button type="button" id="but_20" onclick="press(2,0)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_21" onclick="press(2,1)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_22" onclick="press(2,2)" style="color:white; background-color:black">X</button></td><td><button type="button" id="but_23" onclick="press(2,3)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_24" onclick="press(2,4)" style="color:green; background-color:white">O</button></td></tr><tr><td><button type="button" id="but_30" onclick="press(3,0)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_31" onclick="press(3,1)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_32" onclick="press(3,2)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_33" onclick="press(3,3)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_34" onclick="press(3,4)" style="color:green; background-color:white">O</button></td></tr><tr><td><button type="button" id="but_40" onclick="press(4,0)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_41" onclick="press(4,1)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_42" onclick="press(4,2)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_43" onclick="press(4,3)" style="color:green; background-color:white">O</button></td><td><button type="button" id="but_44" onclick="press(4,4)" style="color:green; background-color:white">O</button></td></tr></table></div>
+<h2 id="end" style="color:green"></h2>
+<div id="resetbutton">
+<button type="button" id="reset" onclick="resetGrid()">Reset</button>
+</div>
+
+
+
+
+
+</body></html>
